@@ -1,5 +1,19 @@
-on: [push, pull_request, workflow_dispatch]
+name: Build ZMK firmware
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      # Path to your ZMK user config repository
+      user_config_repo: ${{ github.repository }}
+      # Branch containing the configuration (default: main)
+      user_config_branch: main
+      # Name of the board
+      board: nice_nano_v2
+      # Name of the shield(s) (adjust if needed)
+      shield: corne_left nice_view_adapter nice_view
