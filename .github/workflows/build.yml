@@ -1,6 +1,19 @@
 name: Build ZMK firmware
-on: [push, pull_request, workflow_dispatch]
 
-build:
-  needs: cache-zephyr-modules
-  uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Zephyr dependencies
+        uses: zmkfirmware/zmk/.github/actions/setup-zephyr@main
+
+      - name: Build Firmware
+        uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
