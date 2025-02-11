@@ -1,20 +1,6 @@
 name: Build ZMK firmware
 on: [push, pull_request, workflow_dispatch]
 
-jobs:
-  cache-zephyr-modules:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Zephyr modules
-        uses: actions/cache@v2
-        with:
-          path: /tmp/zmk-config/modules/
-          key: ${{ runner.os }}-build-cache-zephyr-${{ hashFiles('**/zephyr/module.yml') }}
-          restore-keys: |
-            ${{ runner.os }}-build-cache-zephyr-
-          enableCrossOsArchive: false
-          fail-on-cache-miss: false
-
-  build:
-    needs: cache-zephyr-modules
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+build:
+  needs: cache-zephyr-modules
+  uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
