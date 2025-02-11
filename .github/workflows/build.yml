@@ -13,9 +13,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-cache-zephyr-
           enableCrossOsArchive: false
-          fail-on-cache-miss: true
+          fail-on-cache-miss: false
 
   build:
     needs: cache-zephyr-modules
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
-    
